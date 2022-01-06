@@ -5,7 +5,7 @@ describe('class Thermostat', () => {
     thermostat = new Thermostat();
   });
   it('has a default temperature of 20', () => {
-    expect(thermostat.getTemperature()).toBe(20);
+    expect(thermostat.getTemperature()).toEqual(20);
   });
   it('increases temperature by 1 when up is called', () => {
     thermostat.up()
@@ -16,7 +16,7 @@ describe('class Thermostat', () => {
     expect(thermostat.getTemperature()).toBe(19);
   });
   it('has a minimum temperature setting', () => {
-    for(let i = 0; i < thermostat.minTemperature; i++) {
+    for(let i = 0; i = (thermostat.getTemperature() - thermostat.minTemperature); i++) {
       thermostat.down();
     }
     thermostat.down();
@@ -26,20 +26,58 @@ describe('class Thermostat', () => {
     expect(thermostat.powerSaving).toBe(true);
   });
   it('Power saving mode can be turned off', () => {
-    thermostat.turnPowerSaving('off');
+    thermostat.setPowerSavingMode(false);
     expect(thermostat.powerSaving).toBe(false);
   });
   it('Power saving mode can be turned on after being turned off', () => {
-    thermostat.turnPowerSaving('off');
-    thermostat.turnPowerSaving('on');
+    thermostat.setPowerSavingMode(false);
+    thermostat.setPowerSavingMode(true);
     expect(thermostat.powerSaving).toBe(true);
   });
   it('When power saving mode is on the max temperature is 25', () => {
-    thermostat.turnPowerSaving('on');
+    thermostat.setPowerSavingMode(true);
     expect(thermostat.maxTemperature).toBe(25);
   });
   it('When power saving mode is off the max temperature is 32', () => {
-    thermostat.turnPowerSaving('off');
+    thermostat.setPowerSavingMode(false);
     expect(thermostat.maxTemperature).toBe(32);
+  });
+  it('Can not increase temperature beyond maximum temperature setting of 25 when power saving is on', () => {
+    for(let i = 0; i = (thermostat.maxTemperature - thermostat.getTemperature()); i++) {
+      thermostat.up();
+    }
+    thermostat.up();
+    expect(thermostat.getTemperature()).toBe(25);
+  });
+  it('Can not increase temperature beyond maximum temperature setting of 32 when power saving is off', () => {
+    thermostat.setPowerSavingMode(false)
+    for(let i = 0; i = (thermostat.maxTemperature - thermostat.getTemperature()); i++) {
+      thermostat.up();
+    }
+    thermostat.up();
+    expect(thermostat.getTemperature()).toBe(32);
+  });
+  it('reset puts the temperature to 20', ()=> {
+    thermostat.up();
+    thermostat.reset();
+    expect(thermostat.getTemperature()).toEqual(20);
+  });
+  it('energy usage is low, medium or high depending on temperature setting', ()=> {
+    thermostat.setPowerSavingMode(false)
+    expect(thermostat.energyUsage()).toEqual('Medium');
+    thermostat.down()
+    thermostat.down()
+    thermostat.down()
+    thermostat.down()
+    expect(thermostat.energyUsage()).toEqual('Low');
+    thermostat.reset()
+    thermostat.up();
+    thermostat.up();
+    thermostat.up();
+    thermostat.up();
+    thermostat.up();
+    thermostat.up();
+    thermostat.up();
+    expect(thermostat.energyUsage()).toEqual('High');
   });
 });

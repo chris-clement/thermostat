@@ -9,23 +9,39 @@ class Thermostat {
     return this.temperature;
   };
   up() {
-    this.temperature += 1;
+    if(this.temperature < this.maxTemperature) {
+      this.temperature += 1;
+    };
   };
   down() {
     if(this.temperature > this.minTemperature) {
       this.temperature -= 1;
     };
   };
-  turnPowerSaving(choice) {
-    if(choice === 'off') {
+  setPowerSavingMode(choice) {
+    if(choice === false) {
       this.powerSaving = false;
       this.maxTemperature = 32;
     }
-    else if(choice === 'on') {
+    else if(choice === true) {
       this.powerSaving = true;
       this.maxTemperature = 25;
     };
   };
+  reset() {
+    this.temperature = 20;
+  };
+  energyUsage() {
+    if(this.getTemperature() < 18) {
+      return 'Low';
+    }
+    else if(this.getTemperature() <= 25) {
+      return 'Medium';
+    }
+    else {
+      return 'High';
+    }
+  }
 };
 
 module.exports = Thermostat
