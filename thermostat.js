@@ -3,6 +3,7 @@ class Thermostat {
     this.temperature = 20;
     this.minTemperature = 10;
     this.powerSaving = true;
+    this.maxTemperature = 25;
   };
   getTemperature() {
     return this.temperature;
@@ -18,9 +19,11 @@ class Thermostat {
   turnPowerSaving(choice) {
     if(choice === 'off') {
       this.powerSaving = false;
+      this.maxTemperature = 32;
     }
     else if(choice === 'on') {
       this.powerSaving = true;
+      this.maxTemperature = 25;
     };
   };
 };

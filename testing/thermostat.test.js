@@ -26,12 +26,20 @@ describe('class Thermostat', () => {
     expect(thermostat.powerSaving).toBe(true);
   });
   it('Power saving mode can be turned off', () => {
-    thermostat.turnPowerSaving('off')
-    expect(thermostat.powerSaving).toBe(false)
+    thermostat.turnPowerSaving('off');
+    expect(thermostat.powerSaving).toBe(false);
   });
   it('Power saving mode can be turned on after being turned off', () => {
-    thermostat.turnPowerSaving('off')
-    thermostat.turnPowerSaving('on')
-    expect(thermostat.powerSaving).toBe(true)
+    thermostat.turnPowerSaving('off');
+    thermostat.turnPowerSaving('on');
+    expect(thermostat.powerSaving).toBe(true);
+  });
+  it('When power saving mode is on the max temperature is 25', () => {
+    thermostat.turnPowerSaving('on');
+    expect(thermostat.maxTemperature).toBe(25);
+  });
+  it('When power saving mode is off the max temperature is 32', () => {
+    thermostat.turnPowerSaving('off');
+    expect(thermostat.maxTemperature).toBe(32);
   });
 });
