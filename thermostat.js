@@ -1,6 +1,7 @@
 class Thermostat {
   constructor() {
     this.temperature = 20;
+    this.minTemperature = 10;
   };
   getTemperature() {
     return this.temperature;
@@ -9,7 +10,9 @@ class Thermostat {
     this.temperature += 1;
   };
   down() {
-    this.temperature -= 1;
+    if(this.temperature > this.minTemperature) {
+      this.temperature -= 1;
+    };
   };
 };
 

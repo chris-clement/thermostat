@@ -15,4 +15,12 @@ describe('class Thermostat', () => {
     thermostat.down()
     expect(thermostat.getTemperature()).toBe(19)
   });
+  it('has a minimum temperature setting', () => {
+    for(let i = 0; i < thermostat.minTemperature; i++) {
+      thermostat.down();
+    }
+    thermostat.down()
+    expect(thermostat.getTemperature()).toBe(10)
+  });
+  
 });

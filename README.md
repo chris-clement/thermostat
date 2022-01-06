@@ -3,10 +3,10 @@
 Project written in JavaScript to build a basic Thermostat.
 
 ### MVP of Project
-- The Thermostat starts with an initial temperature of 20 degrees
-- You can increase the temperature with an up method
-- You can decrease the temperature with a down method
-- The minimum possible temperature is 10 degrees
+- The Thermostat starts with an initial temperature of 20 degrees. :white_check_mark:
+- You can increase the temperature with an up method :white_check_mark:
+- You can decrease the temperature with a down method :white_check_mark:
+- The minimum possible temperature is 10 degrees :white_check_mark:
 - The Power saving mode is on by default but it can also be turned off
 - If power saving mode is on, the maximum temperature is 25 degrees
 - If power saving mode is off, the maximum temperature is 32 degrees
